@@ -1,1 +1,7 @@
 @import url('bootstrap.min.css');
+.owl-carousel .item{
+    height: 400px;
+}
+.owl-carousel .item img{
+    height: 100%;
+}

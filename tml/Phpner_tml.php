@@ -19,19 +19,12 @@ class Phpner_tml
                 settings_errors('название_опции');
             ?>
             <div class="row">
-                <div class="owl-carousel owl-theme">
-                    <div class="item"></div>
-
-                </div>
+                <div class="owl-carousel owl-theme"></div>
             </div>
+            <br>
             <div class="row">
-            <form action="" method="POST">
-                <?php
-                settings_fields("opt_group");     // скрытые защитные поля
-                do_settings_sections("opt_page"); // секции с настройками (опциями)
-                ?>
                 <button onclick="return false" class="btn btn-default add-media">Добавить картинку</button>
-            </form>
+                <button onclick="return false" class="btn btn-success save-media">Сохранить</button>
             </div>
         </div>
         <?php

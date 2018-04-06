@@ -77,9 +77,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_owl_carousel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__js_owl_init__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__js_owl_init__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__js_owl_init___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__js_owl_init__);
 /*CSS*/
 
@@ -3538,57 +3538,46 @@ $(function () {});
 /***/ (function(module, exports) {
 
 $(function () {
-    $('.owl-carousel').owlCarousel({
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
         loop: true,
-        margin: 10,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 5
-            }
-        }
+        items: 1,
+        nav: true
     });
-});
 
-/***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, exports) {
+    var mediaSider = wp.media({
+        frame: 'select',
+        title: 'Добавить фото в слайдер',
+        button: {
+            text: 'добавить в слайдер'
+        }, multiple: true
+    });
 
-$(function () {
     $('.add-media').on('click', function (event) {
         event.preventDefault();
-        var mediaSider = wp.media({
-            frame: 'select',
-            title: 'Добавить фото в слайдер',
-            button: {
-                text: 'добавить в слайдер'
-            }, multiple: true
-        });
+
         mediaSider.on('select', function (e) {
             var selection = mediaSider.state().get('selection');
             selection.map(function (img) {
                 var image = img.toJSON();
+                owl.trigger('add.owl.carousel', ["<div class='item'><img src='" + image.url + "'></div><input class='form-control' type='text'>"]).trigger('refresh.owl.carousel');
                 /*  $(".owl-item").append(" <div class='item'><img src='"+image.url+"'></div>");*/
-
-                console.log(image);
+                console.log(image.url);
             });
         });
         mediaSider.open();
+    });
+});
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+$(function () {
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        items: 1,
+        nav: true
     });
 });
 
