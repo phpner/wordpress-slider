@@ -27,9 +27,10 @@ export  default class AddSaveImg{
         var collec = [];
         _this.media.on('select',function (e){
                 var selection = _this.media.state().get('selection');
+                var count = 0;
                 selection.map(function (img){
                     var image = img.toJSON();
-                    _this.el.trigger('add.owl.carousel', ["<div class='item' id='"+ image.id+"'><span class='delete-media btn btn-danger'>X</span><img src='"+image.url+"'><br> <textarea class='form-control' rows='3'></textarea></div>"])
+                    _this.el.trigger('add.owl.carousel', ["<div data-id-cost='"+count++ +"' class='item' id='"+ image.id+"'><span class='delete-media btn btn-danger'>X</span><img src='"+image.url+"'><br> <textarea class='form-control' rows='3'></textarea></div>"])
                         .trigger('refresh.owl.carousel');
                     _this.collect =  collec;
                     _this.media.state().reset();
@@ -55,7 +56,9 @@ export  default class AddSaveImg{
     {
         var _this =  event.data;
         var div =  $(event.target).parent("div");
-        /*_this.el.trigger('remove.owl.carousel', [0]).trigger("refresh.owl.carousel");*/
-        console.log(_this.el);
+        var index = $('.item').index(div);
+       _this.el.trigger('remove.owl.carousel', [index]).trigger("refresh.owl.carousel");
+        console.log(index);
+
     }
 }
