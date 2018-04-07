@@ -1,3 +1,6 @@
+'use strict';
+import Addimg from './add-save-img';
+
 export default class OwlInit{
 
     constructor()
@@ -10,7 +13,9 @@ export default class OwlInit{
     }
     start()
     {
-        this.el.owlCarousel(this.sittings);
+        var init =  this.el.owlCarousel(this.sittings);
+        var addimg = new  Addimg(init);
+      /*  var saveimg = new SaveImg();*/
     }
 
 }

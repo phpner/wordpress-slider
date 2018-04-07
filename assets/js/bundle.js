@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,117 +68,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__owl_init_js__ = __webpack_require__(1);
-
-
-class AddImg extends __WEBPACK_IMPORTED_MODULE_0__owl_init_js__["a" /* default */] {
-    constructor() {
-        super();
-        var element = document.querySelector('.add-media');
-        element.addEventListener('click', this.onClick, false);
-        element.el = this;
-        element.el.media = wp.media({
-            frame: 'select',
-            title: 'Добавить фото в слайдер',
-            button: {
-                text: 'добавить в слайдер'
-            }, multiple: true
-        });
-    }
-    say() {}
-    onClick(e) {
-        var _this = e.target.el;
-        console.log(this);
-        _this.media.on('select', function (e) {
-            var selection = _this.media.state().get('selection');
-
-            console.log(selection);
-
-            selection.map(function (img) {
-                var image = img.toJSON();
-                _this.el.trigger('add.owl.carousel', ["<div class='item'><img src='" + image.url + "'></div><input class='form-control' type='text'>"]).trigger('refresh.owl.carousel');
-                console.log(image.url);
-                _this.media.state().reset();
-            });
-        });
-        _this.media.open();
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = AddImg;
-
-/*
-$(function(){
-    var owl = $('.owl-carousel');
-    owl.owlCarousel({
-        loop:true,
-        items: 1,
-        nav:true,
-    });
-
-    var mediaSider = wp.media({
-        frame: 'select',
-        title: 'Добавить фото в слайдер',
-        button: {
-            text: 'добавить в слайдер'
-        }, multiple: true,
-    });
-
-    $('.add-media').on('click',function (event){
-        event.preventDefault();
-
-        mediaSider.on('select',function (e){
-            var selection = mediaSider.state().get('selection');
-            selection.map(function (img){
-                var image = img.toJSON();
-                owl.trigger('add.owl.carousel', ["<div class='item'><img src='"+image.url+"'></div><input class='form-control' type='text'>"])
-                    .trigger('refresh.owl.carousel');
-                /!*  $(".owl-item").append(" <div class='item'><img src='"+image.url+"'></div>");*!/
-                console.log(image.url);
-            });
-        });
-        mediaSider.open();
-    })
-});*/
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class OwlInit {
-
-    constructor() {
-        this.sittings = {
-            items: 1
-        };
-        this.el = $('.owl-carousel');
-        this.start();
-    }
-    start() {
-        this.el.owlCarousel(this.sittings);
-    }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = OwlInit;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_style_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_owl_carousel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__js_owl_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_owl_init__ = __webpack_require__(5);
+
 /*CSS*/
+
 
 
 
@@ -187,13 +89,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-
 $(function () {
-
-  var o = new __WEBPACK_IMPORTED_MODULE_4__js_sitting_wp_media__["a" /* default */]();
-  o.say();
+  var o = new __WEBPACK_IMPORTED_MODULE_4__js_owl_init__["a" /* default */]();;
 });
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 3 */
@@ -203,18 +113,6 @@ $(function () {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -3633,6 +3531,111 @@ $(function () {
 	}
 
 })(window.Zepto || window.jQuery, window, document);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_save_img__ = __webpack_require__(17);
+
+
+
+
+class OwlInit {
+
+    constructor() {
+        this.sittings = {
+            items: 1
+        };
+        this.el = $('.owl-carousel');
+        this.start();
+    }
+    start() {
+        var init = this.el.owlCarousel(this.sittings);
+        var addimg = new __WEBPACK_IMPORTED_MODULE_0__add_save_img__["a" /* default */](init);
+        /*  var saveimg = new SaveImg();*/
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = OwlInit;
+
+
+/***/ }),
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+
+class AddSaveImg {
+    constructor(el) {
+        this.el = el;
+        var addButton = document.querySelector('.add-media');
+        var saveButton = document.querySelector('.save-media');
+        $('body').on('click', '.delete-media', { el: this.el }, this.onClickDeleteButton);
+
+        addButton.addEventListener('click', this.onClickAddButton, false);
+        saveButton.addEventListener('click', this.onClickSaveButton, false);
+        /* deleteButton.addEventListener('click',this.onClickDeleteButton,false);*/
+
+        addButton.el = this;
+        saveButton.el = this;
+        addButton.el.media = wp.media({
+            frame: 'select',
+            title: 'Добавить фото в слайдер',
+            button: {
+                text: 'добавить в слайдер'
+            }, multiple: true
+        });
+    }
+    onClickAddButton(e) {
+        var _this = e.target.el;
+        var collec = [];
+        _this.media.on('select', function (e) {
+            var selection = _this.media.state().get('selection');
+            selection.map(function (img) {
+                var image = img.toJSON();
+                _this.el.trigger('add.owl.carousel', ["<div class='item' id='" + image.id + "'><span class='delete-media btn btn-danger'>X</span><img src='" + image.url + "'><br> <textarea class='form-control' rows='3'></textarea></div>"]).trigger('refresh.owl.carousel');
+                _this.collect = collec;
+                _this.media.state().reset();
+                collec.push(image.url);
+            });
+        });
+        _this.media.open();
+    }
+    onClickSaveButton(event) {
+
+        var attr = document.getElementsByClassName('item');
+        var res = [];
+        for (var obj of attr) {
+            var id = obj.id;
+            var src = $(obj).find('img').attr('src');
+            var textarea = $(obj).find('textarea').val();
+            res.push({ id: id, url: src, text: textarea });
+        }
+        console.log(res);
+    }
+    onClickDeleteButton(event) {
+        var _this = event.data;
+        var div = $(event.target).parent("div");
+        /*_this.el.trigger('remove.owl.carousel', [0]).trigger("refresh.owl.carousel");*/
+        console.log(_this.el);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = AddSaveImg;
 
 
 /***/ })
