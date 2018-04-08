@@ -7,10 +7,22 @@
 
 class Phpner_tml
 {
-    public  function tmpFrontPage()
+    public  function tmpFrontPage($tml)
     {
+        if($tml)
+        {
+            foreach (json_decode($tml) as $key)
+            {
+                $url = $key->url;
+            }
+        }
         ?>
         <div class="wrap container text-center">
+            <div class="progress" style="display: none">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span class="sr-only">0% Complete</span>
+                </div>
+            </div>
             <h2 class="text-center"><?php echo get_admin_page_title() ?></h2>
             <div class="media-frame.mode-select.wp-core-ui"> </div>
             <?php

@@ -15,7 +15,6 @@ class phpnerSlider
     public function __construct()
     {
         add_action("admin_enqueue_scripts", [$this, "add_script"]);
-
         add_action('admin_menu', function(){
             add_menu_page( 'Настройки слайдер',
                             'Костомный слайдер',
@@ -24,14 +23,41 @@ class phpnerSlider
                             ["Phpner_tml","tmpFrontPage"], '',
                 4 );
         } );
+
+        add_action("wp_ajax_save_img_slider",[$this,"save_img_slider"]);
+        add_action("wp_ajax_get_init_img",[$this,"get_init_img"]);
+        add_option("phpnerSlider",'');
     }
     public function add_script()
     {
         wp_enqueue_media();
-        wp_enqueue_script("main-bundle-script", plugins_url('assets/js/bundle.js',__FILE__), array( 'jquery','wp-api'));
+        wp_enqueue_script("main-bundle-script", plugins_url('assets/js/bundle.js',__FILE__), array( 'jquery','wp-api'),null,true);
 
         wp_enqueue_style("bootstrap-p", plugins_url('assets/css/style.css',__FILE__));
 
+    }
+    public function save_img_slider()
+    {
+        $post = stripslashes($_POST['data']);
+        $res = update_option('phpnerSlider',$post);
+        var_dump(get_option("phpnerSlider"));
+        wp_die();
+    }
+    public function first_render()
+    {
+
+
+    }
+    public function get_init_img()
+    {
+        if((get_option("phpnerSlider")) != "[]" && (get_option("phpnerSlider")) != folse ) {
+            $data = get_option("phpnerSlider");
+            echo $data;
+            wp_die();
+        }else{
+            echo null;
+            wp_die();
+        }
     }
 }
 

@@ -3539,6 +3539,8 @@ $(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_save_img__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ajax_class__ = __webpack_require__(7);
+
 
 
 
@@ -3551,11 +3553,23 @@ class OwlInit {
         };
         this.el = $('.owl-carousel');
         this.start();
+        this.render();
     }
     start() {
         var init = this.el.owlCarousel(this.sittings);
         var addimg = new __WEBPACK_IMPORTED_MODULE_0__add_save_img__["a" /* default */](init);
         /*  var saveimg = new SaveImg();*/
+    }
+    render() {
+        var ajax = new __WEBPACK_IMPORTED_MODULE_1__ajax_class__["a" /* default */]();
+        var getAjax = ajax.InitSlider();
+        getAjax.done(function (request) {
+            var jsonGet = JSON.parse(request);
+            for (let jsonD of jsonGet) {
+                $('.owl-carousel').trigger('add.owl.carousel', ["<div  class='item' id='" + jsonD.id + "'><span class='delete-media btn btn-danger'>X</span><img src='" + jsonD.url + "'><br> <textarea class='form-control' rows='3'>" + jsonD.text + "</textarea></div>"]).trigger('refresh.owl.carousel');
+                console.log(jsonD);
+            }
+        });
     }
 
 }
@@ -3567,6 +3581,8 @@ class OwlInit {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ajax_class__ = __webpack_require__(7);
+
 
 
 class AddSaveImg {
@@ -3616,7 +3632,10 @@ class AddSaveImg {
             var textarea = $(obj).find('textarea').val();
             res.push({ id: id, url: src, text: textarea });
         }
-        console.log(res);
+
+        var dataJsone = JSON.stringify(res);
+        var ajaxing = new __WEBPACK_IMPORTED_MODULE_0__ajax_class__["a" /* default */]();
+        ajaxing.post(dataJsone);
     }
     onClickDeleteButton(event) {
         var _this = event.data;
@@ -3625,8 +3644,61 @@ class AddSaveImg {
         _this.el.trigger('remove.owl.carousel', [index]).trigger("refresh.owl.carousel");
         console.log(index);
     }
+
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = AddSaveImg;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+
+class AjaxClass {
+
+    post(data) {
+        var post = {
+            action: "save_img_slider",
+            data: data
+        };
+        console.log("ajaxing!");
+
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: post,
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                //Upload Progress
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total * 100;
+                        $(".progress").show();
+                        $('div.progress > div.progress-bar').css({ "width": percentComplete + "%" });
+                    }
+                }, false);
+
+                xhr.addEventListener("loadend", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total * 100;
+                    }
+                    $('div.progress > div.progress-bar').css({ "width": 100 + "%" });
+                    $(".progress").hide();
+                }, false);
+                return xhr;
+            },
+            success: function (data) {
+                $("div.progress > div.progress-bar").css("display : none");
+            }
+        });
+    }
+    InitSlider() {
+        return $.get(ajaxurl, { action: 'get_init_img' });
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = AjaxClass;
 
 
 /***/ })

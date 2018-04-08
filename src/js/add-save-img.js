@@ -1,4 +1,5 @@
 'use strict';
+import AjaxClass from './ajax-class';
 export  default class AddSaveImg{
     constructor(el)
     {
@@ -50,7 +51,10 @@ export  default class AddSaveImg{
             var textarea = $(obj).find('textarea').val();
             res.push({id: id, url : src, text : textarea});
         }
-        console.log(res);
+
+        var dataJsone = JSON.stringify(res);
+        var ajaxing = new AjaxClass();
+        ajaxing.post(dataJsone);
     }
     onClickDeleteButton(event)
     {
@@ -61,4 +65,5 @@ export  default class AddSaveImg{
         console.log(index);
 
     }
+
 }
