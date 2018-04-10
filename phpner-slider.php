@@ -10,11 +10,13 @@ Author URI: http://URI_Of_The_Plugin_Author
 License: A "Slug" license name e.g. GPL2
 */
 require 'tml/Phpner_tml.php';
+require 'front/front-function.php';
 class phpnerSlider
 {
     public function __construct()
     {
-        add_action("admin_enqueue_scripts", [$this, "add_script"]);
+        add_action("admin_enqueue_scripts", [$this, "add_script_admin"]);
+        add_action("wp_enqueue_scripts", [$this, "add_script_front"]);
         add_action('admin_menu', function(){
             add_menu_page( 'Настройки слайдер',
                             'Костомный слайдер',
@@ -28,13 +30,18 @@ class phpnerSlider
         add_action("wp_ajax_get_init_img",[$this,"get_init_img"]);
         add_option("phpnerSlider",'');
     }
-    public function add_script()
+    public function add_script_admin()
     {
         wp_enqueue_media();
-        wp_enqueue_script("main-bundle-script", plugins_url('assets/js/bundle.js',__FILE__), array( 'jquery','wp-api'),null,true);
+        wp_enqueue_script("main-bundle-script", plugins_url('assets/js/backend.js',__FILE__), array( 'jquery','wp-api'),null,true);
 
-        wp_enqueue_style("bootstrap-p", plugins_url('assets/css/style.css',__FILE__));
+        wp_enqueue_style("bootstrap-p", plugins_url('assets/css/backend.css',__FILE__));
 
+    }
+    public function add_script_front()
+    {
+        wp_enqueue_script("front-corusel-script", plugins_url('assets/js/front.js',__FILE__), ['jquery'],null, true);
+        wp_enqueue_style("front-carusel", plugins_url('assets/css/front.css',__FILE__));
     }
     public function save_img_slider()
     {

@@ -60,38 +60,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_style_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_owl_carousel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_owl_init__ = __webpack_require__(5);
-
-/*CSS*/
-
-
-
-
-
-/*JS*/
-
-
-
-$(function () {
-  var o = new __WEBPACK_IMPORTED_MODULE_4__js_owl_init__["a" /* default */]();;
-});
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 1 */
@@ -101,18 +77,6 @@ $(function () {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -3534,12 +3498,100 @@ $(function () {
 
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_save_img__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ajax_class__ = __webpack_require__(7);
+
+
+class AjaxClass {
+
+    post(data) {
+        var post = {
+            action: "save_img_slider",
+            data: data
+        };
+        console.log("ajaxing!");
+
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: post,
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                //Upload Progress
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total * 100;
+                        $(".progress").show();
+                        $('div.progress > div.progress-bar').css({ "width": percentComplete + "%" });
+                    }
+                }, false);
+
+                xhr.addEventListener("loadend", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total * 100;
+                    }
+                    $('div.progress > div.progress-bar').css({ "width": 100 + "%" });
+                    $(".progress").hide();
+                }, false);
+                return xhr;
+            },
+            success: function (data) {
+                $("div.progress > div.progress-bar").css("display : none");
+            }
+        });
+    }
+    InitSlider() {
+        return $.get(ajaxurl, { action: 'get_init_img' });
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = AjaxClass;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_style_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_owl_carousel_dist_assets_owl_theme_default_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_owl_carousel_dist_assets_owl_carousel_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_owl_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_owl_carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__js_owl_init__ = __webpack_require__(6);
+
+/*CSS*/
+
+
+
+
+
+/*JS*/
+
+
+
+$(function () {
+  var o = new __WEBPACK_IMPORTED_MODULE_4__js_owl_init__["a" /* default */]();;
+});
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_save_img__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ajax_class__ = __webpack_require__(3);
 
 
 
@@ -3577,11 +3629,11 @@ class OwlInit {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ajax_class__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ajax_class__ = __webpack_require__(3);
 
 
 
@@ -3647,58 +3699,6 @@ class AddSaveImg {
 
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = AddSaveImg;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-
-class AjaxClass {
-
-    post(data) {
-        var post = {
-            action: "save_img_slider",
-            data: data
-        };
-        console.log("ajaxing!");
-
-        $.ajax({
-            url: ajaxurl,
-            type: 'POST',
-            data: post,
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                //Upload Progress
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total * 100;
-                        $(".progress").show();
-                        $('div.progress > div.progress-bar').css({ "width": percentComplete + "%" });
-                    }
-                }, false);
-
-                xhr.addEventListener("loadend", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total * 100;
-                    }
-                    $('div.progress > div.progress-bar').css({ "width": 100 + "%" });
-                    $(".progress").hide();
-                }, false);
-                return xhr;
-            },
-            success: function (data) {
-                $("div.progress > div.progress-bar").css("display : none");
-            }
-        });
-    }
-    InitSlider() {
-        return $.get(ajaxurl, { action: 'get_init_img' });
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = AjaxClass;
 
 
 /***/ })

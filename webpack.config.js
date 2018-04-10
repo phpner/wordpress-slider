@@ -4,10 +4,15 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackNotifierPlugin = require('webpack-notifier');
 module.exports = {
-    entry: './src/main.js',
+    entry: {
+        backend: './src/backend.js',
+        front: './src/front.js'
+            },
     output: {
-        filename: 'js/bundle.js',
+        filename: 'js/[name].js',
         path: path.resolve(__dirname, 'assets')
+    },externals: {
+        jquery: 'jQuery'
     },
     resolve: {
         extensions: ['.js', '.vue', '.json','scss'],
@@ -47,8 +52,8 @@ module.exports = {
     },
     plugins: [
        new WebpackNotifierPlugin(),
-        new ExtractTextPlugin("css/style.css"),
-       /* new webpack.ProvidePlugin({
+        new ExtractTextPlugin("css/[name].css"),
+      /* new webpack.ProvidePlugin({
              $: 'jquery',
               jQuery: 'jquery',
               'window.jQuery': 'jquery'
